@@ -1,0 +1,66 @@
+package junit_Package;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Demoalert_pgm {
+  
+	ChromeDriver driver ;
+	
+	@BeforeEach
+	public void Browse_setup()
+	{
+		driver=new ChromeDriver();
+		driver.get("https://demo.automationtesting.in/Alerts.html");
+		driver.manage().window().maximize();
+	}
+	@Test
+	public void Display_alertbox() throws Exception
+	{
+		WebElement Alertwith_OK= driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[1]/ul/li[1]/a"));
+		Alertwith_OK.click();
+		
+		WebElement alert_button=driver.findElement(By.xpath("//*[@id=\"OKTab\"]/button"));
+		alert_button.click();
+		
+		Alert alrt=driver.switchTo().alert();
+		String alert_text =alrt.getText();
+		System.out.println("Alert is:"+alert_text);
+		
+		Thread.sleep(2000);
+		alrt.accept();
+		
+		WebElement alert_with_cancel=driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[1]/ul/li[2]/a"));
+		alert_with_cancel.click();
+		
+		WebElement confirm_box=driver.findElement(By.xpath("//*[@id=\"CancelTab\"]/button"));
+		confirm_box.click();
+		
+		Alert alrt_confirm=driver.switchTo().alert();
+		String alert_confirm=alrt_confirm.getText();
+		System.out.println("Alert is:"+alert_confirm);
+		
+		Thread.sleep(2000);
+		alrt.accept();
+
+		WebElement alrt_with_textbox=driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div[1]/ul/li[3]/a"));
+		alrt_with_textbox.click();
+		
+		WebElement alrt_prompt_box=driver.findElement(By.xpath("//*[@id=\"Textbox\"]/button"));
+		alrt_prompt_box.click();
+		
+		Alert alrt_prompt=driver.switchTo().alert();
+		String alert_prompt=alrt_prompt.getText();
+		System.out.println("Alert is:"+alert_prompt);
+		alrt_prompt.sendKeys("Aswani");
+		Thread.sleep(6000);
+		alrt.accept();
+		
+		
+		
+	}
+}
